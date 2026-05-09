@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COA Exam Prep — Complete Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+<div id="toast"></div>
+<div class="progress-bar" id="prog"></div>
+ 
+<header>
+  <div class="header-inner">
+    <div class="logo">⚡ COA Prep</div>
+    <input class="search-bar" type="text" placeholder="🔍 Search topics..." id="searchInput" oninput="handleSearch(this.value)">
+    <nav class="chapter-nav" id="chapterNav">
+      <button class="ch-btn active" onclick="showChapter('all',this)">All</button>
+      <button class="ch-btn" onclick="showChapter('ch1',this)">Ch1: Architecture</button>
+      <button class="ch-btn" onclick="showChapter('ch2',this)">Ch2: Performance</button>
+      <button class="ch-btn" onclick="showChapter('ch3',this)">Ch3: Components</button>
+      <button class="ch-btn" onclick="showChapter('ch4',this)">Ch4: Cache</button>
+      <button class="ch-btn" onclick="showChapter('ch5',this)">Ch5: Internal Mem</button>
+      <button class="ch-btn" onclick="showChapter('ch6',this)">Ch6: External Mem</button>
+      <button class="ch-btn" onclick="showChapter('ch7',this)">Ch7: Interconnect</button>
+      <button class="ch-btn" onclick="showChapter('ch8',this)">Ch8: Sorting+DS</button>
+    </nav>
+  </div>
+</header>
+ 
+<div class="hero">
+  <h1>Computer Organization &amp;<br>Architecture</h1>
+  <p>Complete exam preparation — all chapters, theory, diagrams, numericals &amp; sorting algorithms</p>
+  <div class="stats-row">
+    <div class="stat-pill">8 Chapters</div>
+    <div class="stat-pill">50+ Topics</div>
+    <div class="stat-pill">All Sorting Algorithms</div>
+    <div class="stat-pill">Numericals Solved</div>
+  </div>
+</div>
+ 
+<div class="container">
+ 
+<!-- ============ CHAPTER 1 ============ -->
+<div class="chapter-section active" id="ch1">
+<div class="ch-header">
+  <h2>Chapter 1: Computer Architecture Basics</h2>
+  <p>Architecture vs Organisation · Structure & Function · Major Components · CPU internals</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">🏛️</div>
+    <div>
+      <div class="card-title">Architecture vs Organisation</div>
+      <div><span class="tag tag-blue">Definition</span><span class="tag tag-purple">Key Diff</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Architecture</strong> = Logical design + User view = What the computer DOES (programmer visible). Blueprint.</li>
+      <li><strong>Organisation</strong> = How operational attributes are linked = Physical realization = HOW it does it.</li>
+      <li>Architecture: Instruction sets, registers, addressing modes (logical concept)</li>
+      <li>Organisation: Circuits, control signals, connections (physical implementation)</li>
+    </ul>
+    <table class="cmp-table" style="margin-top:10px">
+      <tr><th>Architecture</th><th>Organisation</th></tr>
+      <tr><td>Blueprint</td><td>Physical realization</td></tr>
+      <tr><td>What task is performed</td><td>How task is performed</td></tr>
+      <tr><td>Programmer's view</td><td>Designer's view</td></tr>
+      <tr><td>e.g. Instruction set</td><td>e.g. Control signals</td></tr>
+    </table>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">🔧</div>
+    <div>
+      <div class="card-title">Structure of a Computer System</div>
+      <div><span class="tag tag-green">Structure</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Structure</strong> = How components are arranged and connected</li>
+      <li><strong>Function</strong> = Operation of each individual component as part of structure</li>
+    </ul>
+    <div class="diagram-box">
+      <svg width="280" height="100" viewBox="0 0 280 100">
+        <rect x="10" y="30" width="60" height="40" rx="6" fill="rgba(79,142,247,0.2)" stroke="#4f8ef7" stroke-width="1.5"/>
+        <text x="40" y="55" text-anchor="middle" fill="#4f8ef7" font-size="10" font-weight="700">INPUT</text>
+        <rect x="100" y="10" width="80" height="80" rx="6" fill="rgba(124,58,237,0.2)" stroke="#7c3aed" stroke-width="1.5"/>
+        <text x="140" y="35" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="700">CPU</text>
+        <text x="140" y="50" text-anchor="middle" fill="#a78bfa" font-size="8">ALU</text>
+        <text x="140" y="62" text-anchor="middle" fill="#a78bfa" font-size="8">Control</text>
+        <text x="140" y="74" text-anchor="middle" fill="#a78bfa" font-size="8">Registers</text>
+        <rect x="200" y="30" width="40" height="40" rx="6" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" stroke-width="1.5"/>
+        <text x="220" y="55" text-anchor="middle" fill="#06b6d4" font-size="9" font-weight="700">MEM</text>
+        <rect x="255" y="30" width="20" height="40" rx="4" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="265" y="55" text-anchor="middle" fill="#f59e0b" font-size="7" font-weight="700">OUT</text>
+        <line x1="70" y1="50" x2="100" y2="50" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="180" y1="50" x2="200" y2="50" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="240" y1="50" x2="255" y2="50" stroke="#4b5563" stroke-width="1.5" marker-end="url(#arr)"/>
+        <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L6,3L0,6Z" fill="#4b5563"/></marker></defs>
+      </svg>
+    </div>
+    <ul class="points-list" style="margin-top:8px">
+      <li><strong>Major Structural Components:</strong> CPU, Main Memory, Input Device, Output Device</li>
+      <li>CPU Components: ALU + Control Unit + Registers</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">⚙️</div>
+    <div>
+      <div class="card-title">CPU Structured Components</div>
+      <div><span class="tag tag-amber">ALU</span><span class="tag tag-amber">CU</span><span class="tag tag-amber">Registers</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>ALU (Arithmetic Logic Unit)</strong> — performs arithmetic (+,-,*,/) and logical operations (AND, OR, NOT)</li>
+      <li><strong>Control Unit (CU)</strong>:
+        <br>1. Fetches instruction
+        <br>2. Decodes instruction
+        <br>3. Controls execution</li>
+      <li><strong>Registers</strong> — Fast storage, stores Data, Instructions, Addresses</li>
+    </ul>
+    <div class="alert alert-tip">💡 <span>Control Unit = Nerve center → directs all operations → generates control signals → ensures proper execution</span></div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(6,182,212,0.15)">🗄️</div>
+    <div>
+      <div class="card-title">Main Memory Structure</div>
+      <div><span class="tag tag-cyan">Memory</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Registers → Cache → RAM → Secondary Memory (HDD, SSD)</li>
+    </ul>
+    <div class="section-label">Functions of Main Memory</div>
+    <ul class="points-list">
+      <li>Stores programs and data</li>
+      <li>Supplies data to CPU</li>
+      <li>Stores result</li>
+    </ul>
+    <div class="section-label">Functions of a Computer System</div>
+    <ul class="points-list">
+      <li><strong>Data Processing</strong>: Arithmetic ops (+,-) & Logical ops (AND, OR, NOT)</li>
+      <li><strong>Data Storage</strong>: Temporary + Permanent</li>
+      <li><strong>Data Movement</strong>: Input from Devices, Output to Devices, Data transfer within system</li>
+      <li><strong>Control</strong>: CU directs all ops, generates control signals</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">🖥️</div>
+    <div>
+      <div class="card-title">IAS (Von Neumann) Computer</div>
+      <div><span class="tag tag-purple">Classic</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>IAS</strong> = Institute for Advanced Study — designed by Von Neumann (1946)</li>
+      <li>Components: Main Memory · ALU · Control Unit (PCU) · I/O Equipment</li>
+      <li>Main Memory stores data & instructions</li>
+      <li>ALU operates on binary data</li>
+      <li>CU interprets instructions in memory and causes execution</li>
+    </ul>
+    <div class="section-label">Key Registers in IAS</div>
+    <table class="kv-table">
+      <tr><td>MBR</td><td>Memory Buffer Register — temporary data</td></tr>
+      <tr><td>MAR</td><td>Memory Address Register — address to access</td></tr>
+      <tr><td>IR</td><td>Instruction Register — current opcode</td></tr>
+      <tr><td>IBR</td><td>Instruction Buffer Register — right-hand instruction</td></tr>
+      <tr><td>PC</td><td>Program Counter — address of next instruction</td></tr>
+      <tr><td>AC</td><td>Accumulator — most significant bits of ALU result</td></tr>
+      <tr><td>MQ</td><td>Multiplier Quotient — least significant bits</td></tr>
+    </table>
+    <div class="alert alert-info" style="margin-top:8px">📐 <span>IAS Memory Format: 40-bit word = Left instruction (8-bit opcode + 12-bit address) + Right instruction (8-bit opcode + 11-bit address)</span></div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(239,68,68,0.15)">📋</div>
+    <div>
+      <div class="card-title">Flynn's Classification</div>
+      <div><span class="tag tag-red">Parallel</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Proposed by <strong>M.J. Flynn</strong></li>
+      <li><strong>Instruction Stream</strong> = Sequence of instructions read from memory</li>
+      <li><strong>Data Stream</strong> = Operations performed on data in processor</li>
+    </ul>
+    <table class="cmp-table" style="margin-top:8px">
+      <tr><th>Type</th><th>Full Form</th><th>Description</th></tr>
+      <tr><td><span class="tag tag-blue">SISD</span></td><td>Single Instruction Single Data</td><td>Standard Von Neumann, no parallelism</td></tr>
+      <tr><td><span class="tag tag-green">SIMD</span></td><td>Single Instruction Multiple Data</td><td>One instruction on multiple data (GPU)</td></tr>
+      <tr><td><span class="tag tag-amber">MISD</span></td><td>Multiple Instruction Single Data</td><td>Rare, pipeline processors</td></tr>
+      <tr><td><span class="tag tag-purple">MIMD</span></td><td>Multiple Instruction Multiple Data</td><td>Multiprocessors, most modern systems</td></tr>
+    </table>
+    <div class="alert alert-tip" style="margin-top:8px">💡 <span>SISD: Simplest computer, Von Neumann machine, instructions executed sequentially, one operation at a time</span></div>
+  </div>
+</div>
+ 
+</div><!-- end grid -->
+</div><!-- end ch1 -->
+ 
+<!-- ============ CHAPTER 2 ============ -->
+<div class="chapter-section active" id="ch2">
+<div class="ch-header">
+  <h2>Chapter 2: Designing for Performance</h2>
+  <p>Performance concepts · Pipelining · Multicore · GPU · x86 Evolution · Embedded Systems · Amdahl's Law</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">⚡</div>
+    <div>
+      <div class="card-title">Designing for Performance</div>
+      <div><span class="tag tag-blue">Core Concept</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Means improving how fast and efficiently a computer system executes programs</li>
+      <li>NOT just by increasing clock speed, but by improving architecture, organization and memory</li>
+    </ul>
+    <div class="section-label">Need for Performance Design</div>
+    <ul class="points-list">
+      <li>Cost of computers is decreasing every year</li>
+      <li>Demand for high performance applications increasing (image processing, speed recognition, video conferencing, simulation modeling)</li>
+      <li>Simply increasing clock speed is no longer enough due to power and heat limitations</li>
+    </ul>
+    <div class="section-label">How can we improve performance?</div>
+    <ul class="points-list">
+      <li>Increasing processor speed</li>
+      <li>Improve cache memory</li>
+      <li>Improve processor organization & architecture</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">🔄</div>
+    <div>
+      <div class="card-title">Pipelining</div>
+      <div><span class="tag tag-green">Key Technique</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Multiple instructions are executed in <strong>overlapping stages</strong></li>
+      <li>While one instruction is executing, another is decoding</li>
+    </ul>
+    <div class="pipeline-wrap" style="margin:10px 0">
+      <div class="pipeline-stage">FI<br><span style="font-size:0.6rem;color:var(--text3)">Fetch</span></div>
+      <div class="pipeline-stage">DI<br><span style="font-size:0.6rem;color:var(--text3)">Decode</span></div>
+      <div class="pipeline-stage">CO<br><span style="font-size:0.6rem;color:var(--text3)">Calc Addr</span></div>
+      <div class="pipeline-stage">FO<br><span style="font-size:0.6rem;color:var(--text3)">Fetch Op</span></div>
+      <div class="pipeline-stage">EI<br><span style="font-size:0.6rem;color:var(--text3)">Execute</span></div>
+      <div class="pipeline-stage">WO<br><span style="font-size:0.6rem;color:var(--text3)">Write Out</span></div>
+    </div>
+    <ul class="points-list">
+      <li><strong>Branch Prediction</strong>: CPU predicts which instruction comes next, helps avoid waiting time, keeps CPU busy</li>
+      <li><strong>Data Flow Analysis</strong>: Instructions executed when data is ready, execution order may change from program order</li>
+      <li><strong>Performance Balance</strong>: Balancing speed between processor, memory, I/O device, interconnected buses. If one component is slow, whole system slows down</li>
+    </ul>
+    <div class="section-label">Solutions for Performance Balance</div>
+    <ul class="points-list">
+      <li>Wider memory buses</li>
+      <li>Cache between processor & memory</li>
+      <li>Multiple cache level</li>
+      <li>I/O buffering and parallel I/O operation</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">🧩</div>
+    <div>
+      <div class="card-title">Multicore Processor & MICs</div>
+      <div><span class="tag tag-purple">Modern CPU</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="section-label">Multicore Processor</div>
+    <ul class="points-list">
+      <li>Contains two or more processing cores on a <strong>single chip</strong> sharing memory and cache</li>
+      <li>Power limits prevent increasing clock speed</li>
+      <li>Provides parallel execution with better performance and low energy</li>
+    </ul>
+    <div class="section-label">MICs — Many Integrated Cores</div>
+    <ul class="points-list">
+      <li>Uses <strong>dozens of simple cores</strong> in one chip</li>
+      <li>Contains 50+ cores on a single chip</li>
+      <li>Each core is simpler than a traditional CPU core</li>
+      <li>High parallel processing capability</li>
+    </ul>
+    <div class="section-label">GPU — Graphic Processing Unit</div>
+    <ul class="points-list">
+      <li>Processor designed to perform many calculations simultaneously, mainly for graphics rendering</li>
+      <li>Handles graphics, image, video</li>
+      <li>Processes thousands of operations at same time</li>
+    </ul>
+    <div class="section-label">GPGPU (General Purpose Computing on GPU)</div>
+    <ul class="points-list">
+      <li>Uses GPU on non-graphic tasks: Scientific simulation, Machine Learning, Image Processing, Cryptographic</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">📈</div>
+    <div>
+      <div class="card-title">x-86 Evolution</div>
+      <div><span class="tag tag-amber">Intel History</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>Model</th><th>Key Features</th></tr>
+      <tr><td>8080 (oldest)</td><td>Very basic, 8-bit, first computer use</td></tr>
+      <tr><td>8086</td><td>16-bit, Faster, Beginning of x-86 family</td></tr>
+      <tr><td>80286</td><td>Improved protection & performance, 16 MB memory</td></tr>
+      <tr><td>80386</td><td>32-bit, could run multiple programs at once</td></tr>
+      <tr><td>80486</td><td>Faster execution, Cache added in one-chip, Better pipeline</td></tr>
+      <tr><td>Pentium</td><td>Multiple instructions at same time, Branch prediction, Superscalar execution</td></tr>
+      <tr><td>Pentium Pro</td><td>Advanced branch prediction, Data flow analysis, Speculative execution</td></tr>
+      <tr><td>Pentium ii/iii/iv</td><td>Multimedia support, High clock speed, Improved floating point performance</td></tr>
+    </table>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(6,182,212,0.15)">🤖</div>
+    <div>
+      <div class="card-title">Embedded System</div>
+      <div><span class="tag tag-cyan">Special Purpose</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>A small computer built inside a machine to do one specific job</li>
+      <li>Examples: Washing Machine (wash), Microwave (heat food)</li>
+      <li>Will NOT do browse, typing, gaming</li>
+    </ul>
+    <div class="section-label">Key Points</div>
+    <ul class="points-list">
+      <li>Does one specific task</li>
+      <li>Works automatically</li>
+      <li>Software is usually fixed (firmware)</li>
+      <li>Often works in real life</li>
+      <li>Optimized for low power, small size, reliability, cost</li>
+    </ul>
+    <div class="section-label">Limitations</div>
+    <ul class="points-list">
+      <li>Strict timing requirement, fixed time limit</li>
+      <li>Long life span</li>
+      <li>Operates under harsh environment</li>
+      <li>Must be reliable & safe</li>
+    </ul>
+    <div class="section-label">Basic Components</div>
+    <ul class="points-list">
+      <li>Processor/Microcontroller · Memory · Interfaces · Sensors · Software (Firmware) · A/D and D/A Convertors</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(239,68,68,0.15)">📊</div>
+    <div>
+      <div class="card-title">Amdahl's Law</div>
+      <div><span class="tag tag-red">Numerical</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Deals with the potential speed up of a program using multiple processors</li>
+      <li>States that the speed up due to improvement is limited by the portion of the system that cannot be improved</li>
+    </ul>
+    <div class="formula">Speedup = 1 / [(1-f) + f/N]</div>
+    <table class="kv-table">
+      <tr><td>f</td><td>Fraction of program improved</td></tr>
+      <tr><td>(1-f)</td><td>Unaffected portion of program</td></tr>
+      <tr><td>N</td><td>Number of processors (factor of improvement)</td></tr>
+    </table>
+    <div class="section-label">✏️ Solved Example 1</div>
+    <div class="code-block">
+<span class="cm">// 80% of program improved by factor of 2, find speedup</span>
+f = 80% = 0.8,  1-f = 0.2,  N = 2
+Speedup = 1 / [(1-0.8) + 0.8/2]
+        = 1 / [0.2 + 0.4]
+        = 1 / 0.6
+        = <span class="nm">1.66</span>
+    </div>
+    <div class="section-label">✏️ Solved Example 2</div>
+    <div class="code-block">
+<span class="cm">// 40% improved by factor 2, find overall speedup</span>
+f = 0.4,  1-f = 0.6,  N = 2
+Speedup = 1/[0.6 + 0.4/2] = 1/[0.6+0.2] = 1/0.8 = <span class="nm">1.25</span>
+ 
+<span class="cm">// 80% improved by factor 4, n=4:</span>
+f=0.8, N=4: 1/(0.2 + 0.8/4) = 1/(0.2+0.2) = 1/0.4 = <span class="nm">2.5</span>
+    </div>
+  </div>
+</div>
+ 
+</div>
+</div>
+ 
+<!-- ============ CHAPTER 3 ============ -->
+<div class="chapter-section active" id="ch3">
+<div class="ch-header">
+  <h2>Chapter 3: Computer Components & Instruction Cycle</h2>
+  <p>Computer components · Program Execution · Fetch/Execute cycle · Registers · Interrupts</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">💻</div>
+    <div>
+      <div class="card-title">Computer Components</div>
+      <div><span class="tag tag-blue">Definitions</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Computer</strong> = Programmable electronic device that accepts raw data as input and processes it with a set of instructions to produce result as output</li>
+      <li><strong>Input Device</strong>: allows user to enter data and instructions into computer (Keyboard, Mouse, Microphone)</li>
+      <li><strong>Output Device</strong>: displays result/information through Monitor, LCD, Printer, Plotter, Speaker</li>
+      <li><strong>Storage Device</strong>: retrieves and saves data (Hard drive, Memory stick/pendrive, DVD)</li>
+      <li><strong>Processor/CPU</strong>: interprets and carries out basic instructions. Consists of ALU + Control Unit</li>
+      <li><strong>System Unit</strong>: case that contains electronic components — sound card, video card, processor, memory</li>
+    </ul>
+    <div class="alert alert-info">🔗 <span>All CPU, Main Memory, I/O devices are connected by a System Bus</span></div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">🔄</div>
+    <div>
+      <div class="card-title">Fetch Cycle (Step by Step)</div>
+      <div><span class="tag tag-green">Process</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>In fetch cycle, the process fetches the next instruction from memory using the program counter</li>
+    </ul>
+    <div class="section-label">Steps</div>
+    <ul class="points-list">
+      <li><strong>Step 1:</strong> PC contains address of instruction</li>
+      <li><strong>Step 2:</strong> Address copied to MAR</li>
+      <li><strong>Step 3:</strong> Instruction fetch from memory</li>
+      <li><strong>Step 4:</strong> Instruction stored in MBR</li>
+      <li><strong>Step 5:</strong> Instruction copy to IR</li>
+      <li><strong>Step 6:</strong> PC increments/points to next instruction</li>
+    </ul>
+    <div class="section-label">Execution Cycle (4 types)</div>
+    <ul class="points-list">
+      <li>Processor-Memory (Read or write data from memory)</li>
+      <li>Processor-I/O Device</li>
+      <li>Data Processing</li>
+      <li>Control (change sequence of execution)</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">📝</div>
+    <div>
+      <div class="card-title">Register Use Table</div>
+      <div><span class="tag tag-amber">Registers</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>Register</th><th>Full Form</th><th>Use</th></tr>
+      <tr><td>PC</td><td>Program Counter</td><td>Stores address for next instruction</td></tr>
+      <tr><td>IR</td><td>Instruction Register</td><td>Stores current instruction</td></tr>
+      <tr><td>MAR</td><td>Memory Address Register</td><td>Store memory address to access</td></tr>
+      <tr><td>MBR</td><td>Memory Buffer Register</td><td>Stores data or instruction from memory</td></tr>
+    </table>
+    <div class="section-label">Instruction Format</div>
+    <ul class="points-list">
+      <li>Means how an instruction is written and arranged inside computer memory</li>
+    </ul>
+    <div class="formula">Instruction = Op code + Address</div>
+    <ul class="points-list">
+      <li><strong>Op code</strong> = operation code = what operation to perform</li>
+      <li><strong>Address</strong> = where the data is stored (location of data in memory)</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">⚡</div>
+    <div>
+      <div class="card-title">Interrupts</div>
+      <div><span class="tag tag-purple">Important</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Interrupt</strong> = A signal that stops the normal execution of a program so the CPU can handle an urgent work</li>
+      <li>Needed so CPU doesn't waste time waiting</li>
+      <li>Without interrupts: CPU commands I/O devices, CPU waits until device finishes → CPU time is wasted</li>
+      <li>With interrupts: CPU finishes instruction then does other work → CPU is not idle</li>
+    </ul>
+    <div class="section-label">Types of Interrupt</div>
+    <ul class="points-list">
+      <li><strong>Program Interrupts</strong>: Caused by error in program (e.g., divide by 0, invalid instruction)</li>
+      <li><strong>Timer Interrupts</strong>: Generated by internal clock, prevents one program from using CPU for long time</li>
+      <li><strong>Input/Output Interrupts</strong>: Generated by I/O devices — signal sent by I/O to CPU</li>
+      <li><strong>Hardware Failure Interrupts</strong>: Caused by hardware problems</li>
+    </ul>
+    <div class="section-label">Interrupt Handling Steps</div>
+    <ul class="points-list">
+      <li>1. Interrupt occurs → 2. CPU finishes current instruction → 3. CPU saves current state → 4. CPU jumps to ISR → 5. ISR execute → 6. CPU restores saved state → 7. Program resumes</li>
+    </ul>
+    <div class="alert alert-warn">⚠️ <span><strong>ISR = Interrupt Service Routine</strong> — a special program that handles interrupts</span></div>
+    <div class="section-label">Multiple Interrupts</div>
+    <ul class="points-list">
+      <li><strong>Sequential Interrupts</strong>: Handle one after another, new interrupts wait until current ISR finishes</li>
+      <li><strong>Nested Interrupts</strong>: Higher priority interrupt can interrupt a lower priority ISR. CPU switches immediately to high priority task</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(6,182,212,0.15)">🔁</div>
+    <div>
+      <div class="card-title">Instruction Cycle (IAS detail)</div>
+      <div><span class="tag tag-cyan">5 Types of Instructions</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Processing required for a single instruction: <strong>Fetch Cycle + Execute Cycle</strong></li>
+      <li>Total 21 instructions in IAS</li>
+    </ul>
+    <div class="section-label">5 Types of Instructions</div>
+    <ul class="points-list">
+      <li><strong>Data Transfers</strong>: Moves data between memory and ALU registers</li>
+      <li><strong>Unconditional Branch</strong>: CU executes instructions in sequence, changed by branch instruction</li>
+      <li><strong>Conditional Branch</strong>: Branch depends on a condition, allows decision points</li>
+      <li><strong>Arithmetic</strong>: Operations performed by the ALU</li>
+      <li><strong>Address Modify</strong>: Permits address to be computed in the ALU and then inserted into instructions stored in memory</li>
+    </ul>
+    <div class="section-label">Instruction Cycle State Diagram</div>
+    <ul class="points-list">
+      <li>iac (Instruction Address Calculation)</li>
+      <li>if (Instruction Fetch)</li>
+      <li>iod (Instruction Operation decoding)</li>
+      <li>oac (Operand Address Calculation)</li>
+      <li>of (Operand Fetch)</li>
+      <li>do (Data Operation)</li>
+      <li>os (Operand Store)</li>
+    </ul>
+  </div>
+</div>
+ 
+</div>
+</div>
+ 
+<!-- ============ CHAPTER 4 ============ -->
+<div class="chapter-section active" id="ch4">
+<div class="ch-header">
+  <h2>Chapter 4: Cache Memory</h2>
+  <p>Cache organization · Mapping techniques · Hit/Miss · Replacement algorithms · Write policies · Levels</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">💾</div>
+    <div>
+      <div class="card-title">Computer Memory & Hierarchy</div>
+      <div><span class="tag tag-blue">Foundation</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Computer memory is used to store data, instructions and result so that the CPU can process them</li>
+      <li>A computer doesn't use only one type of memory — uses different types and organizes them properly</li>
+    </ul>
+    <div class="section-label">Memory Characteristics</div>
+    <ul class="points-list">
+      <li>Location of memory · Capacity · Unit of transfer · Access method</li>
+      <li><strong>Access methods:</strong> Sequential, Direct, Random, Associative</li>
+    </ul>
+    <div class="section-label">Why Memory Hierarchy?</div>
+    <ul class="points-list">
+      <li>We need memory that is very fast, very large and very cheap</li>
+      <li>But no single memory satisfies all three</li>
+      <li>Therefore the solution is memory hierarchy</li>
+    </ul>
+    <div class="pyramid">
+      <div class="pyramid-level" style="width:80px;background:rgba(79,142,247,0.25);color:var(--accent);">Registers</div>
+      <div class="pyramid-level" style="width:120px;background:rgba(124,58,237,0.2);color:#a78bfa;">Cache</div>
+      <div class="pyramid-level" style="width:160px;background:rgba(6,182,212,0.15);color:var(--accent3);">Main Memory (RAM)</div>
+      <div class="pyramid-level" style="width:200px;background:rgba(16,185,129,0.12);color:var(--accent5);">Secondary Memory</div>
+      <div class="pyramid-level" style="width:240px;background:rgba(245,158,11,0.1);color:var(--accent4);">Magnetic Tape</div>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">⚡</div>
+    <div>
+      <div class="card-title">Cache Memory</div>
+      <div><span class="tag tag-green">Core</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Cache is a very small, very fast memory placed between CPU and main memory</li>
+      <li>Reduces average memory access times as main memory is slow</li>
+    </ul>
+    <div class="section-label">Why Cache?</div>
+    <ul class="points-list">
+      <li>Main memory is slow</li>
+      <li>Cache reduces carry memory access</li>
+      <li>CPU is fast</li>
+      <li>Cache acts as buffer to reduce the speed gap</li>
+    </ul>
+    <div class="section-label">Cache Operations</div>
+    <ul class="points-list">
+      <li>1. CPU sends memory address</li>
+      <li>2. Cache checks if data is present</li>
+      <li>3. If found → <strong>cache HIT</strong></li>
+      <li>4. If not found → <strong>cache MISS</strong></li>
+      <li>5. On miss → data fetched from main memory, stored in cache, given to CPU</li>
+    </ul>
+    <div class="section-label">Advantages</div>
+    <ul class="points-list">
+      <li>Reduces CPU waiting time · Improves system performance · Uses locality principle · Faster instruction execution</li>
+    </ul>
+    <div class="section-label">Limitations</div>
+    <ul class="points-list">
+      <li>Smaller in size · High cost · Design is very complicated</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">📐</div>
+    <div>
+      <div class="card-title">Cache Terminology & Performance</div>
+      <div><span class="tag tag-amber">Formulas</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="kv-table">
+      <tr><td>Block</td><td>Fixed-size unit of data</td></tr>
+      <tr><td>Cache Line</td><td>Block + tag + control bits</td></tr>
+      <tr><td>Hit</td><td>Data found in cache</td></tr>
+      <tr><td>Miss</td><td>Data NOT found in cache</td></tr>
+    </table>
+    <div class="formula">Hit Ratio = Number of hits / Total number of accesses</div>
+    <div class="section-label">Performance Metrics</div>
+    <table class="kv-table">
+      <tr><td>Access Time (Ta)</td><td>Time required to read or write data. Lower = Faster memory</td></tr>
+      <tr><td>Memory Cycle Time</td><td>Access Time + Extra Time before next access</td></tr>
+      <tr><td>Transfer Rate</td><td>Speed at which data is transferred</td></tr>
+    </table>
+    <div class="formula">T_N = T_a + N/R</div>
+    <table class="kv-table">
+      <tr><td>T_N</td><td>Average time to read/write N bits</td></tr>
+      <tr><td>T_a</td><td>Access time</td></tr>
+      <tr><td>N</td><td>Number of bits</td></tr>
+      <tr><td>R</td><td>Transfer rate</td></tr>
+    </table>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">🗺️</div>
+    <div>
+      <div class="card-title">Cache Mapping Techniques</div>
+      <div><span class="tag tag-purple">3 Types</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Cache mapping determines where a memory block is placed in the cache</li>
+    </ul>
+    <table class="cmp-table">
+      <tr><th>Type</th><th>Description</th><th>Pros/Cons</th></tr>
+      <tr><td><strong>Direct Mapping</strong></td><td>Each memory block maps to only one specific cache line</td><td>Simple, but conflicts</td></tr>
+      <tr><td><strong>Associative Mapping</strong></td><td>Memory block can be placed in any cache line. All tags compared simultaneously</td><td>Flexible, expensive</td></tr>
+      <tr><td><strong>Set Associative</strong></td><td>Cache divided into sets, each set has multiple lines</td><td>Balance of both</td></tr>
+    </table>
+    <div class="section-label">Cache Address Format</div>
+    <ul class="points-list">
+      <li>Memory address divided into: <strong>Tag | Line | Word</strong></li>
+      <li>Used to identify whether a particular block is present in the cache</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(6,182,212,0.15)">🔁</div>
+    <div>
+      <div class="card-title">Replacement Algorithms & Write Policy</div>
+      <div><span class="tag tag-cyan">Algorithms</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Replacement Algorithm decides which cache block to replace when cache is full</li>
+    </ul>
+    <table class="cmp-table">
+      <tr><th>Algorithm</th><th>Strategy</th></tr>
+      <tr><td><span class="tag tag-blue">LRU</span></td><td>Least Recently Used — replaces block not used for longest time</td></tr>
+      <tr><td><span class="tag tag-green">FIFO</span></td><td>First In First Out — replaces oldest block</td></tr>
+      <tr><td><span class="tag tag-amber">LFU</span></td><td>Least Frequently Used — replaces least accessed block</td></tr>
+      <tr><td><span class="tag tag-red">Random</span></td><td>Random selection</td></tr>
+    </table>
+    <div class="section-label">Write Policy</div>
+    <ul class="points-list">
+      <li>Decides how write operations are handled in cache memory</li>
+      <li><strong>Write-Through</strong>: Data is written to both cache AND main memory simultaneously</li>
+      <li><strong>Write-Back</strong>: Data is written only to cache first, and to main memory later</li>
+    </ul>
+    <div class="section-label">Principle of Locality</div>
+    <ul class="points-list">
+      <li><strong>Temporal Locality</strong>: If data item is used once, it is likely to be used again soon (e.g. loop variables)</li>
+      <li><strong>Spatial Locality</strong>: If memory is accessed, nearby locations are likely to be accessed (e.g. Arrays)</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(239,68,68,0.15)">📊</div>
+    <div>
+      <div class="card-title">Cache Levels & Elements</div>
+      <div><span class="tag tag-red">Levels</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>Level</th><th>Description</th></tr>
+      <tr><td>L1 Cache</td><td>Smallest, fastest, closest to CPU</td></tr>
+      <tr><td>L2 Cache</td><td>Shared cache, slower. Larger than L1 but slower than L1</td></tr>
+      <tr><td>L3 Cache</td><td>Shared cache, slower than L2</td></tr>
+    </table>
+    <div class="section-label">Cache Elements</div>
+    <ul class="points-list">
+      <li><strong>Cache Addressing</strong>: Defines how CPU addresses cache memory</li>
+      <li><strong>Logical Address</strong>: Cache addressed using virtual address generated by CPU. Access happens before address translation by MMU</li>
+      <li><strong>Physical Address</strong>: Cache uses physical address after MMU translation</li>
+      <li><strong>MMU</strong> = Memory Management Unit — hardware component that translates virtual address to physical addresses</li>
+    </ul>
+    <div class="section-label">Unified vs Split Cache</div>
+    <ul class="points-list">
+      <li><strong>Unified</strong>: Uses for same instruction & data</li>
+      <li><strong>Split</strong>: Separate cache for instruction and data</li>
+    </ul>
+    <div class="section-label">Cache Size Key Points</div>
+    <ul class="points-list">
+      <li>Larger Cache → Higher hit ratio</li>
+      <li>Smaller Cache → Fast access but more cache misses</li>
+    </ul>
+  </div>
+</div>
+ 
+</div>
+</div>
+ 
+<!-- ============ CHAPTER 5 ============ -->
+<div class="chapter-section active" id="ch5">
+<div class="ch-header">
+  <h2>Chapter 5: Internal Memory (Error Correction)</h2>
+  <p>Memory types · Error correction · ECC · Hamming Code</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">🧠</div>
+    <div>
+      <div class="card-title">Physical Characteristics of Memory</div>
+      <div><span class="tag tag-blue">Types</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Volatile Memory</strong>: Data lost when power is off. Example: RAM</li>
+      <li><strong>Non-Volatile Memory</strong>: Data retains even after power off. Example: ROM</li>
+    </ul>
+    <div class="section-label">Primary vs Secondary Memory</div>
+    <ul class="points-list">
+      <li><strong>Primary Memory</strong>: Very fast, data and program must be in primary memory for execution. Example: RAM, ROM</li>
+      <li><strong>Secondary Memory</strong>: Computer storage device that stores data and program for a very long time</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(239,68,68,0.15)">❌</div>
+    <div>
+      <div class="card-title">Error Correction</div>
+      <div><span class="tag tag-red">ECC</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Error occurs in memory because semiconductor memory is not perfect and subject to error</li>
+      <li>Error can happen while storing or reading data</li>
+    </ul>
+    <div class="section-label">Types of Error</div>
+    <ul class="points-list">
+      <li><strong>Hard Error</strong>: Permanent physical damage in memory cells. Bit maybe stuck at 0 or 1. Causes due to manufacturing defect, environmental damage. <span class="tag tag-red">Cannot be repaired by software</span></li>
+      <li><strong>Soft Error</strong>: Temporary and random, alters content of one or more memory cells. Data changes without damaging memory. Causes due to power fluctuation, alpha particles, radiation. <span class="tag tag-green">Can be detected and corrected</span></li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">🛡️</div>
+    <div>
+      <div class="card-title">Error Correcting Code (ECC) Function</div>
+      <div><span class="tag tag-green">Detailed</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>In ECC functions, when data is to be written into memory, a calculation function (F) is performed on data to produce a code</li>
+      <li>Both code and data are stored</li>
+      <li>An M-bit word of data + K-bit code → actual size is M+K bits</li>
+    </ul>
+    <div class="section-label">When reading:</div>
+    <ul class="points-list">
+      <li>Previously stored word is read out</li>
+      <li>Code used to detect and possibly correct error</li>
+      <li>New set of K-bit are generated from M-bit and compare with fetched code bits</li>
+    </ul>
+    <div class="section-label">3 Comparison Results</div>
+    <ul class="points-list">
+      <li><strong>1.</strong> No error detected → fetched data bits are sent out</li>
+      <li><strong>2.</strong> An error is detected and it is possible to correct it → data bit + error correction bit fed into corrector → produces corrected set of M-bit to be sent out</li>
+      <li><strong>3.</strong> An error is detected, it is NOT possible to correct it → condition is reported</li>
+    </ul>
+    <div class="alert alert-tip">💡 <span>A code is characterized by the number of bit errors in a word that it can correct and detect</span></div>
+  </div>
+</div>
+ 
+</div>
+</div>
+ 
+<!-- ============ CHAPTER 6 ============ -->
+<div class="chapter-section active" id="ch6">
+<div class="ch-header">
+  <h2>Chapter 6: External Memory (RAID)</h2>
+  <p>RAID levels 0–6 · Striping · Mirroring · Parity · Fault tolerance</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">💿</div>
+    <div>
+      <div class="card-title">RAID — What is it?</div>
+      <div><span class="tag tag-blue">Redundant Array of Independent Disks</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>RAID is a technique that combines multiple hard drives into a single system to improve performance, data safety, or both</li>
+      <li>If one drive fails, data can still be recovered from the others</li>
+    </ul>
+    <div class="alert alert-info">📖 <span>RAID = Redundant Array of Independent Disks</span></div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">0️⃣</div>
+    <div>
+      <div class="card-title">RAID 0 — Striping</div>
+      <div><span class="tag tag-red">No Redundancy</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Improves system performance by splitting data into smaller blocks and spreading them across multiple disks</li>
+      <li>Process called <strong>striping</strong></li>
+      <li>Enhances data speed by enabling parallel read and write operations</li>
+      <li><strong>Provides NO redundancy or fault tolerance</strong></li>
+    </ul>
+    <div class="raid-row">
+      <div class="disk disk-data">D1</div>
+      <div class="disk disk-data">D2</div>
+      <div class="disk disk-data">D3</div>
+      <div class="disk disk-data">D4</div>
+      <span style="color:var(--text3);font-size:0.75rem;margin-left:4px">← Striped across disks</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">1️⃣</div>
+    <div>
+      <div class="card-title">RAID 1 — Mirroring</div>
+      <div><span class="tag tag-amber">High Reliability</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Enhances reliability by creating an identical copy of each data block on a separate disk</li>
+      <li>Even if one disk fails, data remains accessible from its duplicate</li>
+      <li>Configuration is highly reliable but requires significant storage space</li>
+    </ul>
+    <div class="raid-row">
+      <div class="disk disk-data">D1</div>
+      <span style="color:var(--text3);font-size:0.8rem">→</span>
+      <div class="disk disk-mirror">M1</div>
+      <span style="color:var(--text3);font-size:0.75rem;margin-left:4px">← Mirror copy</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">2️⃣</div>
+    <div>
+      <div class="card-title">RAID 2, 3, 4, 5, 6</div>
+      <div><span class="tag tag-purple">Advanced</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>RAID</th><th>Feature</th><th>Key Point</th></tr>
+      <tr><td>RAID 2</td><td>Bit-level striping + Hamming code ECC</td><td>Data distributed at bit level, dedicated parity drive; rarely used</td></tr>
+      <tr><td>RAID 3</td><td>Byte-level striping + dedicated parity</td><td>Dedicated parity drive, reconstructs lost data</td></tr>
+      <tr><td>RAID 4</td><td>Block-level striping + dedicated parity disk</td><td>Parity info using XOR function, tolerates single disk failure</td></tr>
+      <tr><td>RAID 5</td><td>Block-level striping + distributed parity</td><td>Parity info distributed across all disks, improves write performance, tolerates single disk failure</td></tr>
+      <tr><td>RAID 6</td><td>Advanced version of RAID 5 + double distributed parity</td><td>Recovers from failure of up to two disks simultaneously, most reliable</td></tr>
+    </table>
+    <div class="alert alert-tip" style="margin-top:8px">💡 <span>RAID 5 is most commonly used — distributes parity so no single point of failure for the parity disk</span></div>
+  </div>
+</div>
+ 
+</div>
+</div>
+ 
+<!-- ============ CHAPTER 7 ============ -->
+<div class="chapter-section active" id="ch7">
+<div class="ch-header">
+  <h2>Chapter 7: Bus Interconnection</h2>
+  <p>System Bus · Data/Address/Control Bus · Synchronous/Asynchronous · Bus Arbitration</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">🔗</div>
+    <div>
+      <div class="card-title">Interconnection & System Bus</div>
+      <div><span class="tag tag-blue">Core</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Interconnection</strong> = Connecting different modules together (CPU/Processor, Input/Output, Memory)</li>
+      <li>A <strong>bus</strong> is a communication pathway connecting two or more devices</li>
+      <li>A bus consists of multiple communication pathways or lines</li>
+      <li>A bus that connects major computer components (processor, memory, I/O) is called a <strong>system bus</strong></li>
+    </ul>
+    <div class="section-label">Types of Data Transfer</div>
+    <ul class="points-list">
+      <li>Memory to processor · Processor to memory · I/O to processor · Processor to I/O · Memory to I/O · I/O to memory</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">📡</div>
+    <div>
+      <div class="card-title">Bus Structure — 3 Components</div>
+      <div><span class="tag tag-green">Data · Address · Control</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>A system bus consists of 50-100 separate lines where each is assigned a particular meaning or function</li>
+      <li>These lines classified into 3 functional groups</li>
+    </ul>
+    <table class="cmp-table">
+      <tr><th>Bus</th><th>Function</th><th>Direction</th></tr>
+      <tr><td><span class="tag tag-blue">Data Bus</span></td><td>Transmits data/instruction from CPU to memory I/O or vice versa. Width = number of bits can carry at a time</td><td>Bidirectional</td></tr>
+      <tr><td><span class="tag tag-amber">Address Bus</span></td><td>Used to identify particular memory location. Specifies memory location CPU wants to communicate. Unidirectional</td><td>Unidirectional</td></tr>
+      <tr><td><span class="tag tag-red">Control Bus</span></td><td>Used to generate timing & control signals to control all components. Connected peripherals</td><td>Bidirectional</td></tr>
+    </table>
+    <div class="section-label">Control Bus Lines Include</div>
+    <ul class="points-list">
+      <li>Memory Write · Memory Read · I/O Write · I/O Read · Transfer ACK · Bus Request · Bus Grant · Interrupt Request · Interrupt ACK · Clock · Reset</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">⏱️</div>
+    <div>
+      <div class="card-title">Synchronous vs Asynchronous Bus</div>
+      <div><span class="tag tag-amber">Timing</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>Feature</th><th>Synchronous</th><th>Asynchronous</th></tr>
+      <tr><td>Clock</td><td>Controlled by common clock</td><td>No common clock</td></tr>
+      <tr><td>Timing</td><td>Events occur at clock signal</td><td>Events follow previous event</td></tr>
+      <tr><td>Speed</td><td>All devices must run at same clock rate</td><td>Devices can run at own speed</td></tr>
+      <tr><td>Problem</td><td>Fast devices must wait for slow ones</td><td>More complex protocol</td></tr>
+    </table>
+    <div class="section-label">Asynchronous Data Transfer</div>
+    <ul class="points-list">
+      <li>Data transferred without having a common clock</li>
+      <li><strong>Handshaking</strong>: Synchronous data structure between sending & receiving devices to ensure data is transferred correctly</li>
+      <li><strong>Strobe method</strong>: Source-initiated or Destination-initiated</li>
+      <li>Terminologies: Sender · Receiver · Packet · Buffer</li>
+    </ul>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">🏗️</div>
+    <div>
+      <div class="card-title">High Performance Bus Architecture</div>
+      <div><span class="tag tag-purple">Modern</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Local Bus</strong>: Connects the processor to cache/bridge for fast data transfer</li>
+      <li><strong>Cache/Bridge</strong>: Acts as interface between local bus & system bus</li>
+      <li><strong>Processor (CPU)</strong>: Executes instruction & controls all operations of the computer</li>
+      <li><strong>System Bus</strong>: Connects part of the system, stores main memory & instructions needed for processing</li>
+      <li><strong>Main Memory</strong>: Stores data & instructions with high speed bus</li>
+    </ul>
+    <div class="section-label">Expansion Bus Devices</div>
+    <ul class="points-list">
+      <li>Graphics · Video · LAN · SCSI (Small Computer System Interface) · Modem · Serial · Firewire · FAX</li>
+    </ul>
+    <div class="section-label">Key Control Lines</div>
+    <ul class="points-list">
+      <li><strong>Bus Request</strong>: Indicates a module needs to gain control of the bus</li>
+      <li><strong>Bus Grant</strong>: Indicates a requesting module has been granted control of the bus</li>
+      <li><strong>Transfer ACK</strong>: Data has been accepted from or placed on the data bus</li>
+      <li><strong>Interrupt Request</strong>: An interrupt is pending</li>
+      <li><strong>Interrupt ACK</strong>: Acknowledge the pending interrupt has been recognized</li>
+    </ul>
+  </div>
+</div>
+ 
+</div>
+</div>
+ 
+<!-- ============ CHAPTER 8 ============ -->
+<div class="chapter-section active" id="ch8">
+<div class="ch-header">
+  <h2>Chapter 8: Sorting Algorithms + Data Structures + Time Complexity</h2>
+  <p>All sorting algorithms explained with examples, code logic, and Big-O complexity</p>
+</div>
+<div class="topic-grid">
+ 
+<div class="topic-card" style="grid-column: span 2">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">📊</div>
+    <div>
+      <div class="card-title">Time Complexity Summary — All Sorting Algorithms</div>
+      <div><span class="tag tag-blue">Quick Reference</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>Algorithm</th><th>Best Case</th><th>Average Case</th><th>Worst Case</th><th>Space</th><th>Stable?</th></tr>
+      <tr><td><span class="tag tag-blue">Bubble Sort</span></td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✅ Yes</td></tr>
+      <tr><td><span class="tag tag-blue">Selection Sort</span></td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>❌ No</td></tr>
+      <tr><td><span class="tag tag-green">Insertion Sort</span></td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✅ Yes</td></tr>
+      <tr><td><span class="tag tag-amber">Merge Sort</span></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td>✅ Yes</td></tr>
+      <tr><td><span class="tag tag-amber">Quick Sort</span></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>❌ No</td></tr>
+      <tr><td><span class="tag tag-purple">Heap Sort</span></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td><td>❌ No</td></tr>
+      <tr><td><span class="tag tag-cyan">Counting Sort</span></td><td>O(n+k)</td><td>O(n+k)</td><td>O(n+k)</td><td>O(k)</td><td>✅ Yes</td></tr>
+      <tr><td><span class="tag tag-cyan">Radix Sort</span></td><td>O(nk)</td><td>O(nk)</td><td>O(nk)</td><td>O(n+k)</td><td>✅ Yes</td></tr>
+      <tr><td><span class="tag tag-red">Shell Sort</span></td><td>O(n log n)</td><td>O(n log²n)</td><td>O(n²)</td><td>O(1)</td><td>❌ No</td></tr>
+    </table>
+    <div class="alert alert-warn" style="margin-top:10px">⚠️ <span><strong>Remember:</strong> n = number of elements, k = range of values. O(n log n) is the theoretical best for comparison-based sorting</span></div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">🫧</div>
+    <div>
+      <div class="card-title">Bubble Sort</div>
+      <div><span class="tag tag-blue">O(n²)</span><span class="tag tag-green">Stable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Repeatedly compares adjacent elements and swaps if in wrong order</li>
+      <li>Largest element "bubbles up" to the end in each pass</li>
+      <li>After each pass, last sorted element is fixed</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Bubble Sort — Array: [64, 34, 25, 12, 22]</span>
+<span class="kw">for</span> i = 0 to n-1:
+  <span class="kw">for</span> j = 0 to n-i-2:
+    <span class="kw">if</span> arr[j] > arr[j+1]:
+      <span class="nm">swap</span>(arr[j], arr[j+1])
+ 
+<span class="cm">Pass 1: [34,25,12,22,64] ← 64 fixed</span>
+<span class="cm">Pass 2: [25,12,22,34,64] ← 34 fixed</span>
+<span class="cm">Pass 3: [12,22,25,34,64] ← sorted!</span>
+    </div>
+    <div class="alert alert-tip">💡 <span>Optimized: If no swap in a pass, array is sorted → O(n) best case</span></div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">☝️</div>
+    <div>
+      <div class="card-title">Selection Sort</div>
+      <div><span class="tag tag-blue">O(n²)</span><span class="tag tag-red">Unstable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Find minimum element from unsorted part and put at beginning</li>
+      <li>Divide array into sorted and unsorted parts</li>
+      <li>Minimum comparisons of swaps</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [64, 25, 12, 22, 11]</span>
+<span class="kw">for</span> i = 0 to n-1:
+  minIdx = i
+  <span class="kw">for</span> j = i+1 to n:
+    <span class="kw">if</span> arr[j] < arr[minIdx]: minIdx = j
+  <span class="nm">swap</span>(arr[i], arr[minIdx])
+ 
+<span class="cm">Pass 1: find min=11, swap pos 0 → [11,25,12,22,64]</span>
+<span class="cm">Pass 2: find min=12, swap pos 1 → [11,12,25,22,64]</span>
+<span class="cm">Result: [11,12,22,25,64]</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">📌</div>
+    <div>
+      <div class="card-title">Insertion Sort</div>
+      <div><span class="tag tag-green">O(n) best</span><span class="tag tag-green">Stable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Pick element and insert it into correct position in sorted part</li>
+      <li>Like sorting playing cards in hand</li>
+      <li>Efficient for small or nearly sorted arrays</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [12, 11, 13, 5, 6]</span>
+<span class="kw">for</span> i = 1 to n-1:
+  key = arr[i]
+  j = i - 1
+  <span class="kw">while</span> j >= 0 and arr[j] > key:
+    arr[j+1] = arr[j]; j = j-1
+  arr[j+1] = key
+ 
+<span class="cm">i=1: key=11, shift 12 → [11,12,13,5,6]</span>
+<span class="cm">i=2: key=13, no shift → [11,12,13,5,6]</span>
+<span class="cm">i=3: key=5, shift all → [5,11,12,13,6]</span>
+<span class="cm">i=4: key=6 → [5,6,11,12,13]</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">🔀</div>
+    <div>
+      <div class="card-title">Merge Sort</div>
+      <div><span class="tag tag-amber">O(n log n)</span><span class="tag tag-green">Stable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li><strong>Divide and Conquer</strong> algorithm</li>
+      <li>Divide array into two halves, sort each half, then merge</li>
+      <li>Always O(n log n) — best, average, worst</li>
+      <li>Extra space O(n) needed</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [38,27,43,3,9,82,10]</span>
+DIVIDE:
+[38,27,43,3] | [9,82,10]
+[38,27] | [43,3] | [9,82] | [10]
+[38] | [27] | [43] | [3] ...
+ 
+MERGE (sorted):
+[27,38] + [3,43] → [3,27,38,43]
+[9,82] + [10] → [9,10,82]
+[3,27,38,43] + [9,10,82] → <span class="st">[3,9,10,27,38,43,82]</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(6,182,212,0.15)">⚡</div>
+    <div>
+      <div class="card-title">Quick Sort</div>
+      <div><span class="tag tag-amber">O(n log n) avg</span><span class="tag tag-red">Unstable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Pick a <strong>pivot</strong>, partition array around pivot</li>
+      <li>Elements smaller than pivot go left, larger go right</li>
+      <li>Recursively sort left and right subarrays</li>
+      <li>Worst case O(n²) when already sorted and pivot is always smallest/largest</li>
+      <li>Best in practice for large arrays — in-place</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [10,80,30,90,40,50,70], pivot=last</span>
+Partition: pivot=70
+[10,30,40,50] pivot=70 [80,90]
+            ↓
+Recursively sort sub-arrays
+<span class="cm">Result: [10,30,40,50,70,80,90]</span>
+ 
+<span class="kw">PARTITION</span>(arr, low, high):
+  pivot = arr[high]; i = low - 1
+  <span class="kw">for</span> j = low to high-1:
+    <span class="kw">if</span> arr[j] <= pivot: i++; swap(arr[i], arr[j])
+  swap(arr[i+1], arr[high])
+  <span class="kw">return</span> i+1
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(239,68,68,0.15)">🏔️</div>
+    <div>
+      <div class="card-title">Heap Sort</div>
+      <div><span class="tag tag-amber">O(n log n)</span><span class="tag tag-red">Unstable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Uses a <strong>Binary Heap</strong> data structure</li>
+      <li>Build a Max-Heap from array, then extract max repeatedly</li>
+      <li>Two phases: Build heap + Sort</li>
+      <li>Always O(n log n) for all cases</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [12,11,13,5,6,7]</span>
+<span class="kw">Step 1: Build Max-Heap</span>
+       13
+      /  \
+    12    7
+   / \  /
+  5   6 11  <span class="cm">→ Max-Heap</span>
+ 
+<span class="kw">Step 2: Extract max repeatedly</span>
+Swap root(13) with last → [12,11,7,5,6,<span class="nm">13</span>]
+Heapify reduced heap... repeat
+<span class="st">Result: [5,6,7,11,12,13]</span>
+ 
+<span class="kw">HEAPIFY</span>(arr, n, i):
+  largest=i; l=2i+1; r=2i+2
+  <span class="kw">if</span> l<n and arr[l]>arr[largest]: largest=l
+  <span class="kw">if</span> r<n and arr[r]>arr[largest]: largest=r
+  <span class="kw">if</span> largest!=i: swap; HEAPIFY(arr,n,largest)
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(16,185,129,0.15)">🔢</div>
+    <div>
+      <div class="card-title">Counting Sort</div>
+      <div><span class="tag tag-cyan">O(n+k)</span><span class="tag tag-green">Stable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Non-comparison sorting — works on integers</li>
+      <li>Count occurrences of each element</li>
+      <li>k = range of input values</li>
+      <li>Efficient when range k is small</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [1,4,1,2,7,5,2]</span>
+<span class="kw">Step 1:</span> Count array: count[1]=2, count[2]=2, count[4]=1, count[5]=1, count[7]=1
+<span class="kw">Step 2:</span> Cumulative count
+<span class="kw">Step 3:</span> Build output array from right to left
+<span class="st">Result: [1,1,2,2,4,5,7]</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(124,58,237,0.15)">📻</div>
+    <div>
+      <div class="card-title">Radix Sort</div>
+      <div><span class="tag tag-cyan">O(nk)</span><span class="tag tag-green">Stable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Sort digit by digit from least significant digit (LSD) to most significant digit (MSD)</li>
+      <li>Uses Counting Sort as subroutine</li>
+      <li>Does not compare elements</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [170,45,75,90,802,24,2,66]</span>
+<span class="kw">Pass 1 (units digit):</span>
+[170,90,802,2,24,45,75,66]
+ 
+<span class="kw">Pass 2 (tens digit):</span>
+[802,2,24,45,66,170,75,90]
+ 
+<span class="kw">Pass 3 (hundreds digit):</span>
+<span class="st">[2,24,45,66,75,90,170,802]</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">🐚</div>
+    <div>
+      <div class="card-title">Shell Sort</div>
+      <div><span class="tag tag-red">O(n log²n)</span><span class="tag tag-red">Unstable</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="points-list">
+      <li>Generalization of Insertion Sort</li>
+      <li>Sort elements far apart first, gradually reduce gap (interval)</li>
+      <li>When gap = 1, it becomes regular insertion sort</li>
+    </ul>
+    <div class="code-block">
+<span class="cm">// Array: [12,34,54,2,3], gap starts at n/2</span>
+gap = 5/2 = 2:
+Compare arr[0]&arr[2]: [12,34,54,2,3] → sort at gap 2
+<span class="cm">→ after gap=2: [12,34,54,2,3]</span>
+gap = 1 (insertion sort):
+<span class="st">Result: [2,3,12,34,54]</span>
+ 
+<span class="kw">for</span> gap = n/2; gap > 0; gap = gap/2:
+  <span class="kw">for</span> i = gap to n:
+    key = arr[i]; j = i
+    <span class="kw">while</span> j>=gap and arr[j-gap]>key:
+      arr[j]=arr[j-gap]; j -= gap
+    arr[j] = key
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card" style="grid-column: span 2">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(79,142,247,0.15)">🧮</div>
+    <div>
+      <div class="card-title">CPI (Cycles Per Instruction) — Numericals</div>
+      <div><span class="tag tag-blue">Exam Numerical</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="section-label">Formula</div>
+    <div class="formula">CPI (avg) = Total Clock Cycles / Total Number of Instructions</div>
+    <div class="formula">Total Clock Cycles = Σ (Instruction Count × CPI for each type)</div>
+    <div class="section-label">✏️ Solved Example</div>
+    <div class="code-block">
+Given:
+  Arithmetic:  400 instructions × 1 CPI = 400 cycles
+  Load/Store:  300 instructions × 2 CPI = 600 cycles
+  Branch:      300 instructions × 3 CPI = 900 cycles
+  Total instructions = 1000
+ 
+Total Clock Cycles = 400 + 600 + 900 = <span class="nm">1900</span>
+Avg CPI = 1900 / 1000 = <span class="nm">1.9</span>
+    </div>
+  </div>
+</div>
+ 
+<div class="topic-card" style="grid-column: span 2">
+  <div class="card-head">
+    <div class="card-icon" style="background:rgba(245,158,11,0.15)">🏗️</div>
+    <div>
+      <div class="card-title">CISC vs RISC</div>
+      <div><span class="tag tag-amber">Comparison</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="cmp-table">
+      <tr><th>Feature</th><th>CISC (Complex Instruction Set)</th><th>RISC (Reduced Instruction Set)</th></tr>
+      <tr><td>Instructions</td><td>Many, complex instructions</td><td>Few, simple instructions</td></tr>
+      <tr><td>Execution</td><td>Multiple clock cycles per instruction</td><td>One clock cycle per instruction</td></tr>
+      <tr><td>Memory Access</td><td>Many addressing modes</td><td>Load/Store architecture</td></tr>
+      <tr><td>Registers</td><td>Few registers</td><td>Many registers</td></tr>
+      <tr><td>Code Size</td><td>Smaller code</td><td>Larger code</td></tr>
+      <tr><td>Pipeline</td><td>Difficult to pipeline</td><td>Easier to pipeline</td></tr>
+      <tr><td>Examples</td><td>x86, Intel</td><td>ARM, MIPS, RISC-V</td></tr>
+      <tr><td>Power</td><td>More power consumption</td><td>Less power consumption</td></tr>
+    </table>
+  </div>
+</div>
+ 
+</div><!-- end grid -->
+</div><!-- end ch8 -->
+ 
+</div><!-- container -->
+ 
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+ 
+<script src="script.js"></script>
+</body>
+</html>
